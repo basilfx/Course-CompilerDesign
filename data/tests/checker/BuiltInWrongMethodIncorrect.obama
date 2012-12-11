@@ -1,0 +1,3 @@
+(void)main:(String[])args {
+    [builtin notexisting :1 :2];
+}

@@ -1,0 +1,4 @@
+(int)main:(String)args 
+{ 
+    [builtin print:@"Hallo %s" :@"Bas"];
+}

@@ -1,0 +1,93 @@
+(void)countFrom:(int)start to:(int)max
+{
+    int i;
+
+    for (i = start; i <= max; i = i + 2) {
+        [System.out println:i];
+    }
+}
+
+(void)isEqual:(int)a to:(int)b
+{
+    if (a == b) {
+        [System.out println:@"Numbers are equal"];
+    } else if (a < b) {
+        [System.out println:@"Number a is smaller than b"];
+    } else {
+        [System.out println:@"Number a is bigger than b"];
+    }
+}
+
+(void)isMore:(int)a than:(int)b
+{
+
+    if (a > b) {
+        [System.out println:YES];
+    }
+}
+
+(void)isLess:(int)a than:(int)b
+{
+    if (a < b) {
+        if (a < (b / 10)) {
+            if (a < (b / 100)) {
+                [System.out println:YES];
+            }
+        }
+    }
+}
+
+(void)say:(String)message times:(int)x 
+{
+    int i = x;
+
+    while (i > 0) {
+        [System.out println:message];
+        i = i - 1;
+    }
+}
+
+(void)numberMinusThree:(int)x
+{
+    int result;
+
+    switch (x) {
+        case 0:
+            result = 3;
+            break;
+        case 1:
+            result = 2;
+            break;
+        case 2:
+            result = 1;
+            break;
+        default:
+            result = 0;
+    }
+
+    [System.out println:result];
+}
+
+(void)main:(String[])args
+{
+    /* For-loop */
+    [global countFrom:0 to:10];
+
+    /* If-else-if-else */
+    [global isEqual:10 to:10];
+    [global isEqual:10 to:100];
+    [global isEqual:100 to:10];
+    
+    /* Nested if */
+    [global isMore:100 than:10];
+    [global isLess:100 than:1000000];
+
+    /* While-loop */
+    [global say:@"Hello" times:5];
+
+    /* Switch statement */
+    [global numberMinusThree:3];
+    [global numberMinusThree:2];
+    [global numberMinusThree:1];
+    [global numberMinusThree:-1];
+}

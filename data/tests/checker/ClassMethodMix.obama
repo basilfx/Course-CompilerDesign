@@ -1,0 +1,28 @@
+#import <java.lang.*>
+
+(void)One
+{
+
+}
+
+class Two {
+    +(void)public 
+    {
+
+    }
+    
+    -(void)private 
+    {
+
+    }
+    
+    ~(void)protected 
+    {
+
+    }
+}
+
+(void)Three
+{
+
+}

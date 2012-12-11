@@ -1,0 +1,4 @@
+(void)main:(String[])args {
+	/* Correcte print met 4 parameters, waarvan 2 strings, 1 int en 1 bool */
+    [builtin print :@"Een String" :@"\n" :5 :YES];
+}

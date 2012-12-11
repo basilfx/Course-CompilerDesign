@@ -1,0 +1,14 @@
+(void)main:(String[])args {
+    int a = 1;
+    int b = 2;
+    int c = 3;
+
+    /* Print a, b, c */
+    [builtin print :a :b :c];
+
+    /* Print a and then increment a */
+    a = [builtin print:a] + 1;
+
+    /* Print a again, but result is popped since it is not used */
+    [builtin print:a];
+}

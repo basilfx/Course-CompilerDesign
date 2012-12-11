@@ -1,0 +1,9 @@
+class Foo {
+    + (void)Bar {
+        [System.out println:@"From a class!"];
+    }
+}
+
+(void)main:(String[])args {
+    Foo foo = new Foo;
+}

@@ -1,0 +1,4 @@
+(int)main:(String)args 
+{ 
+    [console println:@"Test"];
+}

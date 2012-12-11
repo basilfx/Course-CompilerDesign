@@ -1,0 +1,12 @@
+(int)factorial:(int)n {
+    
+    if (n > 1) {
+        return n * [global factorial:n-1];
+    } else {
+        return 1;
+    }
+}
+
+(void)main:(String[])args {
+    [System.out println:[global factorial:5]];
+}

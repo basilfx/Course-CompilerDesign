@@ -1,0 +1,16 @@
+class One {
+    +(int)public 
+    {
+
+    }
+    
+    -(int)private 
+    {
+
+    }
+    
+    ~(int)protected 
+    {
+
+    }
+}

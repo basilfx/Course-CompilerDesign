@@ -1,0 +1,34 @@
+(void)print:(String)message
+{
+    [System.out println:message];
+}
+
+(void)printInt:(int)number
+{
+    [System.out println:number];
+}
+
+(void)waitForEnter
+{
+	int input;
+    [builtin read:input];
+}
+
+(int)calculate:(int)a :(int)b 
+{
+    return a + b;
+}
+
+(void)main:(String[])args 
+{ 
+    [global print:@"Hello"];
+    [global print:@"This is printed from another method call"];
+
+    [global print:@"Please press enter"];
+    [global waitForEnter];
+    [global print:@"Good boy!"];
+
+    int a = [global calculate :1 :2];
+    [global print:@"Sum is"];
+    [global printInt:a];
+}

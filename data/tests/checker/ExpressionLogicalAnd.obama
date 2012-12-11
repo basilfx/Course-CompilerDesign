@@ -1,0 +1,4 @@
+(bool)Two
+{
+    return YES && NO;
+}

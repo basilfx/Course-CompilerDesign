@@ -1,0 +1,5 @@
+(int)One:(int)a
+{
+    int a = 42;
+    return a;
+}

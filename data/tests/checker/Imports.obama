@@ -1,0 +1,14 @@
+#import <java.lang.String>
+#import <java.utils.*>
+
+(int)main:(String)args 
+{
+	int a;
+	java.util.ArrayList list;
+ 
+    /* Print hello world */
+    [System.out println:@"Hello World"];
+
+    /* Program exited without errors */
+    [System exit:0];
+}

@@ -1,0 +1,7 @@
+(void)main:(String[])args {
+	int a;
+	int b;
+
+	/* Correct: leest int a, leest int b, voert a + b uit */
+	[builtin print:([builtin read :a] + [builtin read :b])];
+}

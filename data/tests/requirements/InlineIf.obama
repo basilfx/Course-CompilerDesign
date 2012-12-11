@@ -1,0 +1,6 @@
+(void)main:(String[])args {
+    bool condition = NO;
+    String result = condition ? @"True" : @"False"; 
+
+    [System.out println:result];
+}

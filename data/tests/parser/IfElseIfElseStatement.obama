@@ -1,0 +1,13 @@
+(void)main {
+    int a = 0;
+
+    if(!YES) {
+    	a = 1;
+    } else if(YES) {
+    	a = 2;
+    } else {
+    	a = 3;
+    }
+
+    return a == 2;
+}

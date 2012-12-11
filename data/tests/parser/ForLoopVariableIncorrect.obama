@@ -1,0 +1,9 @@
+(bool)One {
+    int a = 0;
+
+    for (String i = @"Invalid"; i; i = i + 1) {
+    	a = a + 1;
+    }
+
+    return a == 5;
+}

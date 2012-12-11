@@ -1,0 +1,46 @@
+/* Hoger, Lager */
+#import <java.util.Random>
+
+(int)leesLus {
+	int input;
+	[System.out println :@"Voer uw gok in: "];
+	
+	[builtin read :input];
+	return input;	
+}
+
+(void)main:(String[])args {
+	/* genereer een getal tussen 0 en 100 */
+	
+	Random generator = [builtin init:new Random];
+	int computerGetal = [generator nextInt:101];
+	int beurten = 0;
+	int y;
+	
+	[System.out println:@"De computer heeft een getal tussen 0 en 100 bedacht. Welk getal is het?"];
+	
+	bool geraden = NO;
+	int a = [global leesLus];
+	beurten = beurten + 1;
+
+	while(geraden == NO) {
+		if(a == computerGetal) {
+			[System.out println :@"Geraden!"];
+			geraden = YES;
+			beurten = beurten + 1;
+		} else if(a < computerGetal) {
+			[System.out println :@"Hoger"];
+			a = [global leesLus];
+			beurten = beurten + 1;
+		} else {
+			[System.out println :@"Lager"];
+			a = [global leesLus];
+			beurten = beurten + 1;
+		}
+	}
+	
+	[System.out print:@"U heeft het getal in "];
+	[System.out print:beurten];
+	[System.out println:@" geraden!"];
+	[System exit:0];
+}

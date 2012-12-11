@@ -1,0 +1,66 @@
+(String)trueFalse:(bool)value
+{
+    if (value == YES) {
+        return @"true";
+    } else {
+        return @"false";
+    }
+}
+
+(void)main:(String[])args
+{ 
+    int a = 5;
+    int b = 10;
+    bool c = YES;
+    bool d = NO;
+
+    /* Basic arithmetic */
+    [builtin print:a + b];
+    [builtin print:@" "];
+	
+    [builtin print:a - b];
+    [builtin print:@" "];
+    [builtin print:b - a];
+    [builtin print:@" "];
+	
+    [builtin print:a * b];
+    [builtin print:@" "];
+    [builtin print:b * a];
+    [builtin print:@" "];
+    [builtin print:b / a];
+    [builtin print:@" "];
+	
+    [builtin print:a * b + b / a - b];
+    [builtin print:@" "];
+    
+    /* Modulo */
+	[builtin print:a % b];
+    [builtin print:@" "];
+    [builtin print:b % a];
+    [builtin print:@" "];
+    
+    /* Boolen operators */
+    [builtin print:[global trueFalse:!c]];
+    [builtin print:@" "];
+    [builtin print:[global trueFalse:!d]];
+    [builtin print:@" "];
+    
+    [builtin print:[global trueFalse:c && d]];
+    [builtin print:@" "];
+    [builtin print:[global trueFalse:c && !d]];
+    [builtin print:@" "];
+    [builtin print:[global trueFalse:c || d]];
+    [builtin print:@" "];
+    [builtin print:[global trueFalse:c || !d]];
+    [builtin print:@" "];
+    [builtin print:[global trueFalse:!c || !d]];
+    [builtin print:@" "];
+    
+    [builtin print:[global trueFalse:a > b]];
+    [builtin print:@" "];
+    [builtin print:[global trueFalse:a < b]];
+    [builtin print:@" "];
+    [builtin print:[global trueFalse:a == b]];
+    [builtin print:@" "];
+    [builtin print:[global trueFalse:a == a]];
+}

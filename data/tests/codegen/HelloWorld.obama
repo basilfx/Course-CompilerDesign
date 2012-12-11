@@ -1,0 +1,12 @@
+(void)main:(String[])args 
+{ 
+    /* Print hello world */
+    [System.out println:@"Hello World"];
+
+    /* Wait for user pressing enter */
+	int a;
+    [builtin read:a];
+
+    /* Program exited without errors */
+    [System exit:0];
+}

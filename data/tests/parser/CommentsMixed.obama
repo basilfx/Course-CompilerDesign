@@ -1,0 +1,5 @@
+#import <java.util.List> /* OK */
+#import <java.util.ArrayList>
+#import <java.util.*>
+#import /* OK */ <java>
+ 

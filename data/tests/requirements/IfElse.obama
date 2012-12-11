@@ -1,0 +1,17 @@
+(void)main:(String[])args {
+    bool condition = NO;
+
+    if (condition == YES) {
+        [System.out print:@"True"];
+    } else {
+        [System.out print:@"False"];
+    }
+
+    [System.out print:@" "];
+
+    if (condition == !YES) {
+        [System.out print:@"True"];
+    } else {
+        [System.out print:@"False"];
+    }
+}

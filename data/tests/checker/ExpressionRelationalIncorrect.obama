@@ -1,0 +1,4 @@
+(bool)One
+{
+    return @"Aap" > @"Mies";
+}

@@ -1,0 +1,8 @@
+(void)main:(String[])args {
+	/* Incorrect, geen string en false is geen keyword (NO is bool) */
+    [builtin print :NO];
+	
+	/* Incorrect, 1 + 5 is geen bool op */
+	int a = 5;
+	[builtin print:(1 + 5 || a == 5)];
+}

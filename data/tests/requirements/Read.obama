@@ -1,0 +1,14 @@
+(void)main:(String[])args {
+    int a = 0;
+    int b = 0;
+
+    /* Read two integers in a, b */
+    [builtin read :a :b];
+
+    /* Display a message */
+    if (a >= b) {
+        [builtin print:@"The first integer is bigger or equal than second integer"];
+    } else {
+        [builtin print:@"The second integer is bigger than first integer"];
+    }
+}

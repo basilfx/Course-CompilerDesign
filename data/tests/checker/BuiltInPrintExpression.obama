@@ -1,0 +1,7 @@
+(void)main:(String[])args {
+    /* Correcte print met daarin een print die 6 op levert en daar wordt 3 bij opgeteld. Gevolgde door 2 string prints */
+    [builtin print :([builtin print :(3 + 3)] + 3) :@"= 6 + 3" :@"= 9"];
+
+	/* 2 vergelijkingen die na de AND 1 bool op leveren: YES*/
+	[builtin print:(1 < 5 && 5 < 10)];
+}

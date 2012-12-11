@@ -1,0 +1,14 @@
+(int)One
+{
+    return 3 * 2;
+}
+
+(int)Two
+{
+    return 6 / 3;
+}
+
+(int)Three
+{
+    return 12 % 4;
+}

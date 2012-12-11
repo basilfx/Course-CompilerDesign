@@ -1,0 +1,2 @@
+const int i = 0;
+const String j = @"Test";

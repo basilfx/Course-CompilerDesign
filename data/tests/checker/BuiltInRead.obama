@@ -1,0 +1,6 @@
+(void)main:(String[])args {
+	int a;
+	int b;
+	bool c;
+    [builtin read :a :b :c];
+}

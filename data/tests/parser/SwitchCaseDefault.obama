@@ -1,0 +1,19 @@
+(void)main {
+    int a = 0;
+
+    switch (a) {
+    	case 1:
+    		a = 1;
+    		break;
+    	case 3:
+    		a = 2;
+    		break;
+    	case 6:
+    		a = 3;
+    		break;
+    	default:
+    		a = 4;
+    }
+
+    return a == 4;
+}

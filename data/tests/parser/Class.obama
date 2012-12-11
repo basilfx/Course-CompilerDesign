@@ -1,0 +1,13 @@
+class Foo {
+    +(int)public {
+
+    }
+    
+    -(int)private {
+
+    }
+    
+    ~(int)protected {
+
+    }
+}

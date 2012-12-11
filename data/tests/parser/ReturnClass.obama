@@ -1,0 +1,5 @@
+class Test {
+    +(int)main {
+        return 1337;
+    }
+}

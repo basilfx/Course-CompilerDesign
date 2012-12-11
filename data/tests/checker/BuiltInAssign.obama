@@ -1,0 +1,3 @@
+(void)main:(String[])args {
+    int a = [builtin print :1];
+}

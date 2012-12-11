@@ -1,0 +1,14 @@
+(bool)One
+{
+    return 1 < 2;
+}
+
+(bool)Two
+{
+    return YES != NO;
+}
+
+(bool)Three
+{
+    return 'b' > 'a';
+}

@@ -1,0 +1,6 @@
+(int)One
+{
+    int a = 1 + 1;
+    bool b = YES || NO;
+    char c = 'a' + 65;
+}

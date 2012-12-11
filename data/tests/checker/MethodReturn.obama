@@ -1,0 +1,4 @@
+(int)One:(int)a
+{
+    return a;
+}

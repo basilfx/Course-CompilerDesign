@@ -1,0 +1,14 @@
+(bool)One
+{
+    return !YES;
+}
+
+(bool)Two
+{
+    return !NO;
+}
+
+(bool)Three
+{
+    return YES;
+}

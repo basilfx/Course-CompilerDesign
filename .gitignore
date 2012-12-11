@@ -1,0 +1,21 @@
+# Java files
+*.class
+*.tam
+bin/
+
+# Eclipse files
+.classpath
+.settings
+.project
+
+# Antlr generated files
+ObamaLexer.java
+ObamaParser.java
+ObamaChecker.java
+ObamaCodegen.java
+ObamaLexer.tokens
+ObamaParser.tokens
+ObamaChecker.tokens
+ObamaCodegen.tokens
+__Test__.java
+__Test___input.txt

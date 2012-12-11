@@ -1,0 +1,7 @@
+(bool)One {
+    int a = 0;
+
+    while (YES) {
+    	a = 1;
+    }
+}

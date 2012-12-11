@@ -1,0 +1,7 @@
+(void)main:(String[])args {
+	int a;
+	bool b;
+
+	/* Incorrect: de eerste read levert void op */
+    [builtin read:[builtin read :a :b]];
+}

@@ -1,0 +1,13 @@
+(bool)One {
+    int a = 0;
+
+    switch (a) {
+        case NO:
+            a = 1;
+            break;
+        default:
+            a = 2;
+    }
+
+    return a == 1;
+}

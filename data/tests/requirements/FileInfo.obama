@@ -1,0 +1,11 @@
+#import <java.io.*>
+
+(void)main:(String[])args {
+    File file = [builtin init:new File :@"FileInfo.class"];
+
+    [System.out print:@"The file "];
+    [System.out print:[file getName]];
+    [System.out print:@" is "];
+    [System.out print:[file length]];
+    [System.out println:@" bytes big"];
+}

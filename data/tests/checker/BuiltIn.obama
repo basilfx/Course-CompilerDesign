@@ -1,0 +1,3 @@
+(void)main:(String[])args {
+    [builtin print :1 :2 :3];
+}

@@ -1,0 +1,11 @@
+(void)main {
+    int a = 0;
+
+    if(NO) {
+    	a = 1;
+    } else {
+    	a = 2;
+    }
+
+    return a == 2;
+}
