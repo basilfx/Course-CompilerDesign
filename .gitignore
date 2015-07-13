@@ -1,6 +1,5 @@
 # Java files
-*.class
-*.tam
+target/
 bin/
 
 # Eclipse files
@@ -8,14 +7,6 @@ bin/
 .settings
 .project
 
-# Antlr generated files
-ObamaLexer.java
-ObamaParser.java
-ObamaChecker.java
-ObamaCodegen.java
-ObamaLexer.tokens
-ObamaParser.tokens
-ObamaChecker.tokens
-ObamaCodegen.tokens
-__Test__.java
-__Test___input.txt
+# IntelliJ
+.idea/
+*.iml
