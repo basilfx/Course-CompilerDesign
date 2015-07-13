@@ -1,15 +1,14 @@
 package vb.obama;
 
+import java.io.File;
 import java.io.IOException;
 
-import org.antlr.runtime.ANTLRFileStream;
-import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.*;
 import org.antlr.runtime.debug.BlankDebugEventListener;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import org.junit.rules.TemporaryFolder;
 import vb.obama.antlr.ObamaChecker;
 import vb.obama.antlr.ObamaCodegen;
 import vb.obama.antlr.ObamaLexer;
@@ -19,6 +18,10 @@ import vb.obama.antlr.tree.TypedNodeAdapter;
 import vb.obama.compiler.SymbolTable;
 import vb.obama.util.DebugAppender;
 import vb.obama.util.LoggerSetup;
+import vb.obama.util.ProcessRunner;
+
+import org.junit.After;
+import org.junit.Before;
 
 /**
  * Abstract class for the tests of the code samples. Contains a helper methods
@@ -29,17 +32,22 @@ import vb.obama.util.LoggerSetup;
 abstract class AbstractTest {
 	
 	/**
-	 * Reference to logger (used to output information to stdout/stderr)
+	 * Reference to logger (used to output information to stdout/stderr).
 	 */
-	private static final Logger logger = Logger.getLogger(AbstractTest.class.getName());
+	private static final Logger logger = Logger.getLogger(AbstractTest.class);
 	
 	/**
-	 * Reference to appender
+	 * Reference to appender.
 	 */
 	private static final DebugAppender appender = new DebugAppender();
-	
+
 	/**
-	 * Debug the parser if true
+	 * Placeholder to temporary working directory.
+	 */
+	public TemporaryFolder tempFolder = new TemporaryFolder();
+
+	/**
+	 * Debug the parser if true.
 	 */
 	protected boolean debugParser = false;
 	protected boolean debugChecker = false;
@@ -48,9 +56,30 @@ abstract class AbstractTest {
 	public AbstractTest() {
 		LoggerSetup.setup(appender);
 	}
-	
+
 	/**
-	 * 
+	 * Handle creation of temporary test output folder.
+	 */
+	@Before
+	public void before() {
+		try {
+			this.tempFolder.create();
+		} catch (IOException exception) {
+			logger.error("Unable to create temporary folder for test output", exception);
+		}
+	}
+
+	/**
+	 * Handle cleanup of temporary test output folder.
+	 */
+	@After
+	public void after() {
+		this.tempFolder.delete();
+	}
+
+	/**
+	 * Execute one test from file.
+	 *
 	 * @param file Path to file
 	 * @return Number of syntax errors, or -1 if an RecognitionException occurred
 	 * @throws IOException
@@ -60,24 +89,24 @@ abstract class AbstractTest {
 
 		appender.setTable(null);
 		logger.info(String.format("*** Testing file '%s' ***", file));
-		
+
 		try {
 			// Symbol table
 			SymbolTable table = new SymbolTable();
 			appender.setTable(table);
-			
+
 			// Lexer
-			ObamaLexer lexer = new ObamaLexer(new ANTLRFileStream(file));
-	        CommonTokenStream tokens = new CommonTokenStream(lexer);
-	        
-	        // Parser
-	        ObamaParser parser = this.debugParser ? new ObamaParser(tokens) : new ObamaParser(tokens);
-	        parser.setTreeAdaptor(new TypedNodeAdapter());
-	        ObamaParser.program_return parserResult = parser.program();
-	        
-	        TypedNode tree = parserResult.getTree();
+			ObamaLexer lexer = new ObamaLexer(new ANTLRInputStream(this.getClass().getResourceAsStream(file)));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+			// Parser
+			ObamaParser parser = this.debugParser ? new ObamaParser(tokens) : new ObamaParser(tokens);
+			parser.setTreeAdaptor(new TypedNodeAdapter());
+			ObamaParser.program_return parserResult = parser.program();
+
+			TypedNode tree = parserResult.getTree();
 			errors = errors + parser.getNumberOfSyntaxErrors();
-			
+
 			// Checker
 			if (doChecker) {
 				CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
@@ -86,18 +115,22 @@ abstract class AbstractTest {
 				checker.setInputFile(file);
 				checker.setTreeAdaptor(new TypedNodeAdapter());
 				checker.program();
-				
+
 				// Codegen
 				if (doCodegen) {
 					CommonTreeNodeStream codegenNodes = new CommonTreeNodeStream(tree);
 					ObamaCodegen codegen = this.debugCodegen ? new ObamaCodegen(codegenNodes) : new ObamaCodegen(codegenNodes, new BlankDebugEventListener());
 					codegen.setTreeAdaptor(new TypedNodeAdapter());
 					codegen.program();
-					
+
 					// Generate code
 					codegen.getHelper().toClasses(path);
 				}
 			}
+		} catch (IOException exception) {
+			appender.setTable(null);
+			logger.info(String.format("*** Test failed: test not found ***"));
+			throw exception;
 		} catch (RecognitionException exception) {
 			appender.setTable(null);
 			logger.info(String.format("*** Test finished: exception: %s ***", exception));
@@ -117,7 +150,20 @@ abstract class AbstractTest {
 		return this.executeFile(file, true, false, null);
 	}
 	
-	protected int executeFileCodegen(String file, String path) throws RecognitionException, IOException {
-		return this.executeFile(file, true, true, path);
+	protected int executeFileCodegen(String file) throws RecognitionException, IOException {
+		return this.executeFile(file, true, true, this.tempFolder.getRoot().getAbsolutePath());
+	}
+
+	/**
+	 * Execute a Java application and return its stdin. Requires java to be on the
+	 * execution path.
+	 *
+	 * @param className Name of class to execute
+	 * @return Console stdout output
+	 * @throws IOException
+	 */
+	public String runJavaFile(String className) throws IOException {
+		String[] arguments = {"java", className};
+		return ProcessRunner.runProcess(arguments, this.tempFolder.getRoot());
 	}
 }

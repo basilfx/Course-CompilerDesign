@@ -11,25 +11,15 @@ import org.junit.Test;
  * Tests ObamaCodegen.g
  * 
  * @version 1.0
- * @see ObamaCodegen.g
+ * @see vb/obama/antlr/ObamaCodegen.g
  */
 public class CodegenTest extends AbstractTest {
-	/**
-	 * Path to files, relative to project root
-	 */
-	private static String BASE_PATH = "/Users/basilfx/Desktop/Course-CompilerDesign/src/test/resources/tests/codegen/";
-	
-	/**
-	 * Path to output directory, relative to project root
-	 */
-	private static String OUTPUT_PATH = "tmp/";
-	
 	/**
 	 * Simple test for var declaration and initialisation
 	 */
 	@Test
 	public void testSingleVar() throws RecognitionException, IOException {
-		assertEquals(0, this.executeFileCodegen(BASE_PATH + "SingleVar.obama", OUTPUT_PATH));
+		assertEquals(0, this.executeFileCodegen("codegen/SingleVar.obama"));
 	} 
 	
 	/** 
@@ -37,7 +27,7 @@ public class CodegenTest extends AbstractTest {
 	 */
 	@Test
 	public void testHelloWorld() throws RecognitionException, IOException {
-		assertEquals(0, this.executeFileCodegen(BASE_PATH + "HelloWorld.obama", OUTPUT_PATH));
+		assertEquals(0, this.executeFileCodegen("codegen/HelloWorld.obama"));
 	}
 	
 	/**
@@ -45,7 +35,7 @@ public class CodegenTest extends AbstractTest {
 	 */
 	@Test
 	public void testSimpleVars() throws RecognitionException, IOException {
-		assertEquals(0, this.executeFileCodegen(BASE_PATH + "SimpleVars.obama", OUTPUT_PATH));
+		assertEquals(0, this.executeFileCodegen("codegen/SimpleVars.obama"));
 	}
 	
 	/**
@@ -53,7 +43,7 @@ public class CodegenTest extends AbstractTest {
 	 */
 	@Test
 	public void testMultipleAssignment() throws RecognitionException, IOException {
-		assertEquals(0, this.executeFileCodegen(BASE_PATH + "MultipleAssignment.obama", OUTPUT_PATH));
+		assertEquals(0, this.executeFileCodegen("codegen/MultipleAssignment.obama"));
 	}
 	
 	/**
@@ -61,7 +51,7 @@ public class CodegenTest extends AbstractTest {
 	 */
 	@Test
 	public void testOperators() throws RecognitionException, IOException {
-		assertEquals(0, this.executeFileCodegen(BASE_PATH + "Operators.obama", OUTPUT_PATH));
+		assertEquals(0, this.executeFileCodegen("codegen/Operators.obama"));
 	}
 	
 	/**
@@ -69,7 +59,7 @@ public class CodegenTest extends AbstractTest {
 	 */
 	@Test
 	public void testMethodCalls() throws RecognitionException, IOException {
-		assertEquals(0, this.executeFileCodegen(BASE_PATH + "MethodCalls.obama", OUTPUT_PATH));
+		assertEquals(0, this.executeFileCodegen("codegen/MethodCalls.obama"));
 	}
 	
 	/**
@@ -77,7 +67,7 @@ public class CodegenTest extends AbstractTest {
 	 */
 	@Test
 	public void testStatements() throws RecognitionException, IOException {
-		assertEquals(0, this.executeFileCodegen(BASE_PATH + "Statements.obama", OUTPUT_PATH));
+		assertEquals(0, this.executeFileCodegen("codegen/Statements.obama"));
 	}
 	
 	/**
@@ -85,6 +75,6 @@ public class CodegenTest extends AbstractTest {
 	 */
 	@Test
 	public void testClassMethodMix() throws RecognitionException, IOException {
-		assertEquals(0, this.executeFileCodegen(BASE_PATH + "ClassMethodMix.obama", OUTPUT_PATH));
+		assertEquals(0, this.executeFileCodegen("codegen/ClassMethodMix.obama"));
 	}
 }
