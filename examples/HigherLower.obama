@@ -1,0 +1,46 @@
+/* Higher, Lower */
+#import <java.util.Random>
+
+(int)readLoop {
+	int input;
+	[System.out println :@"Enter a guess: "];
+	
+	[builtin read :input];
+	return input;	
+}
+
+(void)main:(String[])args {
+	/* Generate a number between 0 and 100 */
+	
+	Random generator = [builtin init:new Random];
+	int theNumber = [generator nextInt:101];
+	int attempts = 0;
+	int y;
+	
+	[System.out println:@"The computer has chosen a number. Can you guess it?"];
+	
+	bool guessed = NO;
+	int a = [global readLoop];
+	attempts = attempts + 1;
+
+	while(guessed == NO) {
+		if(a == theNumber) {
+			[System.out println :@"Correct!"];
+			guessed = YES;
+			attempts = attempts + 1;
+		} else if(a < theNumber) {
+			[System.out println :@"Higher"];
+			a = [global readLoop];
+			attempts = attempts + 1;
+		} else {
+			[System.out println :@"Lower"];
+			a = [global readLoop];
+			attempts = attempts + 1;
+		}
+	}
+	
+	[System.out print:@"You have guessed the number in "];
+	[System.out print:attempts];
+	[System.out println:@" attempts!"];
+	[System exit:0];
+}

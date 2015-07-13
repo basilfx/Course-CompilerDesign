@@ -1,0 +1,11 @@
+(void)main:(String[])args {
+	int a;
+
+	[builtin print:@"Enter a number. I will count up to twice that number."];
+	a = [builtin read:a] * 2;
+
+    while (a > 0) {
+        [builtin print:a];
+        a = a - 1;
+    }
+}
