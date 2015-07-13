@@ -47,7 +47,6 @@ abstract class AbstractTest {
 	
 	public AbstractTest() {
 		LoggerSetup.setup(appender);
-		//Logger.getRootLogger().setLevel(Level.DEBUG);
 	}
 	
 	/**
@@ -72,19 +71,17 @@ abstract class AbstractTest {
 	        CommonTokenStream tokens = new CommonTokenStream(lexer);
 	        
 	        // Parser
-	        ObamaParser parser = this.debugParser ? new ObamaParser(tokens) : new ObamaParser(tokens, new BlankDebugEventListener());
+	        ObamaParser parser = this.debugParser ? new ObamaParser(tokens) : new ObamaParser(tokens);
 	        parser.setTreeAdaptor(new TypedNodeAdapter());
 	        ObamaParser.program_return parserResult = parser.program();
 	        
-	        TypedNode tree = (TypedNode) parserResult.getTree();
+	        TypedNode tree = parserResult.getTree();
 			errors = errors + parser.getNumberOfSyntaxErrors();
-			
-			//System.out.println(tree.toStringTree());
 			
 			// Checker
 			if (doChecker) {
 				CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
-				ObamaChecker checker = this.debugChecker ? new ObamaChecker(nodes) : new ObamaChecker(nodes, new BlankDebugEventListener());
+				ObamaChecker checker = this.debugChecker ? new ObamaChecker(nodes) : new ObamaChecker(nodes);
 				checker.setSymbolTable(table);
 				checker.setInputFile(file);
 				checker.setTreeAdaptor(new TypedNodeAdapter());

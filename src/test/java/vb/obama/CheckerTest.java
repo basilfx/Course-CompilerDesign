@@ -19,7 +19,7 @@ public class CheckerTest extends AbstractTest {
 	/**
 	 * Path to files, relative to project root
 	 */
-	private static String BASE_PATH = "data/tests/checker/";
+	private static String BASE_PATH = "/Users/basilfx/Desktop/Course-CompilerDesign/src/test/resources/tests/checker/";
 	
 	/*
 	 * Imports 

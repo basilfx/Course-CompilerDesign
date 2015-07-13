@@ -16,7 +16,6 @@ import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.GeneratorAdapter;
 import org.objectweb.asm.commons.Method;
 
-import sun.tools.tree.Node;
 import vb.obama.antlr.tree.NodeType;
 import vb.obama.antlr.tree.TypedNode;
 import vb.obama.antlr.tree.info.ClassInfo;

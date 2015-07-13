@@ -19,7 +19,7 @@ public class ParserTest extends AbstractTest {
 	/**
 	 * Path to files, relative to project root
 	 */
-	private static String BASE_PATH = "data/tests/parser/";
+	private static String BASE_PATH = "/Users/basilfx/Desktop/Course-CompilerDesign/src/test/resources/tests/parser/";
 	
 	/**
 	 * Empty file

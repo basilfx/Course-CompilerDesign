@@ -8,7 +8,7 @@ import org.antlr.runtime.tree.CommonTreeAdaptor;
 /**
  * Adapter to create typed nodes.
  * @version 1.0
- * @see http://www.antlr.org/wiki/display/ANTLR3/Tree+construction
+ * @see @link{http://www.antlr.org/wiki/display/ANTLR3/Tree+construction}
  */
 public class TypedNodeAdapter extends CommonTreeAdaptor {
 	/**

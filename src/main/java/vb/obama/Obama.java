@@ -47,7 +47,7 @@ public class Obama {
 	/**
 	 * Current version number of compiler
 	 */
-	public static final int[] VERSION = { 1, 0, 0 };
+	public static final int[] VERSION = { 2, 0, 0 };
 	
 	/**
 	 * Indicate debugging on or off;
@@ -75,7 +75,7 @@ public class Obama {
 	 * @see vb.obama.util.ExitCodes
 	 */
 	public static void main(String args[]) {
-		int exitCode = 0;
+		int exitCode;
 		
 		try {
 			// Build an option parser
@@ -215,7 +215,7 @@ public class Obama {
 	        CommonTokenStream tokens = new CommonTokenStream(lexer);
 	        
 	        // Parser
-	        ObamaParser parser = Obama.antlrWorks ? new ObamaParser(tokens) : new ObamaParser(tokens, new BlankDebugEventListener());
+	        ObamaParser parser = Obama.antlrWorks ? new ObamaParser(tokens) : new ObamaParser(tokens);
 	        parser.setTreeAdaptor(new TypedNodeAdapter());
 	        ObamaParser.program_return parserResult = parser.program();
 			tree = (TypedNode) parserResult.getTree();
@@ -227,7 +227,7 @@ public class Obama {
 		try {
 			// Checker
 			CommonTreeNodeStream checkerNodes = new CommonTreeNodeStream(tree);
-			ObamaChecker checker = Obama.antlrWorks ? new ObamaChecker(checkerNodes) : new ObamaChecker(checkerNodes, new BlankDebugEventListener());
+			ObamaChecker checker = Obama.antlrWorks ? new ObamaChecker(checkerNodes) : new ObamaChecker(checkerNodes);
 			checker.setTreeAdaptor(new TypedNodeAdapter());
 			checker.setSymbolTable(new SymbolTable());
 			checker.setInputFile(file.getAbsolutePath());

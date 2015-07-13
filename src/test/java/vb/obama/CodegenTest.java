@@ -17,7 +17,7 @@ public class CodegenTest extends AbstractTest {
 	/**
 	 * Path to files, relative to project root
 	 */
-	private static String BASE_PATH = "data/tests/codegen/";
+	private static String BASE_PATH = "/Users/basilfx/Desktop/Course-CompilerDesign/src/test/resources/tests/codegen/";
 	
 	/**
 	 * Path to output directory, relative to project root

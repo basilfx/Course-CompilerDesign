@@ -44,8 +44,8 @@ program
 
 // Imports
 imports
-	:	{isImport = true;} IMPORT LT node=package_path GT {isImport = false;} 
-		-> ^(IMPORT PACKAGE[node.path])
+	:	{isImport = true;} IMPORT LT node=package_path GT {isImport = false;}
+		-> ^(IMPORT PACKAGE[$node.path])
 	;
 
 // Rest of file
@@ -80,7 +80,7 @@ class_contents
 	;
 
 class_method_declaration
-	:	node=method_accessor! method_declaration[node.modifiers]
+	:	node=method_accessor! method_declaration[$node.modifiers]
 	;
 
 class_var_declaration
@@ -279,7 +279,7 @@ field
 	:	BUILTIN
 	|	THIS
 	|	GLOBAL
-	|	node=package_path -> FIELD[node.path]
+	|	node=package_path -> FIELD[$node.path]
 	;
 
 literal
@@ -293,44 +293,44 @@ literal
 	;
 
 // Package names and paths
-package_path returns [String path = ""; ]
+package_path returns [String path = ""]
 	:	IDENTIFIER 
 		{ 
 			$path = $IDENTIFIER.text; 
 		} 
 		(
-			PERIOD part2=package_name 
+			PERIOD part=package_name
 			{ 
-				$path = $path + "." + part2.path; 
+				$path = $path + "." + $part.path;
 			}
 		)?
 	;
 
-package_name returns [String path = "";]
+package_name returns [String path = ""]
 	:	{isImport}? MULT 
 		{ 
 			$path = "*"; 
 		}
 	|	part=package_path
 		{ 
-			$path = part.path;
+			$path = $part.path;
 		}
 	;
 
 // Types
-type
+type returns [String type = ""]
 	:	node=sub_type (array_declare 
 			{ 
-				node.type = node.type + "+"; 
+				$type = $node.type + "+";
 			}
 		)* 
-		-> ^(TYPE[node.type])
+		-> ^(TYPE[$type])
 	;
 	
 sub_type returns [String type]
 	:	node=package_path 
 		{ 
-			$type = node.path; 
+			$type = $node.path;
 		}
 	|	VOID 
 		{ 

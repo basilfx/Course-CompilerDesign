@@ -10,14 +10,14 @@ import org.junit.Test;
 import vb.obama.util.ProcessRunner;
 
 /**
- * Tests the project requirements, as far as they are implemented
+ * Tests the project requirements, as far as they have been implemented.
  * @version 1.0
  */
 public class RequirementsTest extends AbstractTest {
 	/**
 	 * Path to files, relative to project root
 	 */
-	private static String BASE_PATH = "data/tests/requirements/";
+	private static String BASE_PATH = "/Users/basilfx/Desktop/Course-CompilerDesign/src/test/resources/tests/requirements/";
 	
 	/**
 	 * Path to output directory, relative to project root
@@ -28,7 +28,7 @@ public class RequirementsTest extends AbstractTest {
 	 * Demonstrates recursion by calculating factorial 5.
 	 * 
 	 * Expected output: 120
-	 * @see data/tests/requirements/Recursion.obama
+	 * @see resources/tests/requirements/Recursion.obama
 	 */
 	@Test
 	public void testRecursion() throws RecognitionException, IOException {
@@ -41,7 +41,7 @@ public class RequirementsTest extends AbstractTest {
 	 * calculate their sum.
 	 * 
 	 * Expected output: 30 
-	 * @see data/tests/requirements/MultipleAssignment.obama
+	 * @see resources/tests/requirements/MultipleAssignment.obama
 	 */
 	@Test
 	public void testMultipleAssignment() throws RecognitionException, IOException {
@@ -54,7 +54,7 @@ public class RequirementsTest extends AbstractTest {
 	 * the correct value.
 	 * 
 	 * Expected output: False
-	 * @see data/tests/requirements/InlineIf.obama
+	 * @see resources/tests/requirements/InlineIf.obama
 	 */
 	@Test
 	public void testInlineIf() throws RecognitionException, IOException {
@@ -68,7 +68,7 @@ public class RequirementsTest extends AbstractTest {
 	 * the condition
 	 * 
 	 * Expected output: False True
-	 * @see data/tests/requirements/IfElse.obama
+	 * @see resources/tests/requirements/IfElse.obama
 	 */
 	@Test
 	public void testIfElse() throws RecognitionException, IOException {
@@ -81,7 +81,7 @@ public class RequirementsTest extends AbstractTest {
 	 * next number is bigger then 10.
 	 * 
 	 * Expected output: 10 9 8 7 6 5 4 3 2 1
-	 * @see data/tests/requirements/WhileDo.obama
+	 * @see resources/tests/requirements/WhileDo.obama
 	 */
 	@Test
 	public void testWhileDo() throws RecognitionException, IOException {
@@ -95,7 +95,7 @@ public class RequirementsTest extends AbstractTest {
 	 * be directly used as an expression.
 	 * 
 	 * Expected output: 3 2 1 1 2
-	 * @see data/tests/requirements/Print.obama
+	 * @see resources/tests/requirements/Print.obama
 	 */
 	@Test
 	public void testPrint() throws RecognitionException, IOException {
@@ -110,7 +110,7 @@ public class RequirementsTest extends AbstractTest {
 	 * returned. With more parameters, it will return void.
 	 * 
 	 * Expected output: The second integer is bigger than first integer
-	 * @see data/tests/requirements/Read.obama
+	 * @see resources/tests/requirements/Read.obama
 	 */
 	@Test
 	public void testRead() throws RecognitionException, IOException {
@@ -124,7 +124,7 @@ public class RequirementsTest extends AbstractTest {
 	 * the program should compile because ASM checks for invalid stacks.
 	 * 
 	 * Expected output: Stack clean :)
-	 * @see data/tests/requirements/PopTest.obama 
+	 * @see resources/tests/requirements/PopTest.obama 
 	 */
 	@Test
 	public void testPopTest() throws RecognitionException, IOException {
@@ -138,7 +138,7 @@ public class RequirementsTest extends AbstractTest {
 	 * expression and the use of casting and accessing fields of instances.
 	 * 
 	 * Expected output: [One, Two, Three]
-	 * @see data/tests/requirements/NewExpression.obama 
+	 * @see resources/tests/requirements/NewExpression.obama 
 	 */
 	@Test
 	public void testNewExpression() throws RecognitionException, IOException {
@@ -153,7 +153,7 @@ public class RequirementsTest extends AbstractTest {
 	 * of the source file (which is included in the bytecode).
 	 * 
 	 * Expected output: The file FileInfo.class is 715 bytes big
-	 * @see data/tests/requirements/FileInfo.obama 
+	 * @see resources/tests/requirements/FileInfo.obama 
 	 */
 	@Test
 	public void testFileInfo() throws RecognitionException, IOException {
@@ -170,7 +170,7 @@ public class RequirementsTest extends AbstractTest {
 	 * Expected output: 15 -5 5 50 50 2 42 5 0 false true false true true true 
 	 * 					true false true false true
 	 * 
-	 * @see data/tests/requirements/Operators.obama 
+	 * @see resources/tests/requirements/Operators.obama 
 	 */
 	@Test
 	public void testOperators() throws RecognitionException, IOException {
