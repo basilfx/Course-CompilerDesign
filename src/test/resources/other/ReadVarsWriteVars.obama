@@ -1,9 +1,0 @@
-(void)main:(String[])args {
-	int a;
-	int b;
-	int c;
-
-	[builtin print:@"Voer drie getallen in"];
-	[builtin read :a :b :c];
-	[builtin print :a :b :c];
-}
