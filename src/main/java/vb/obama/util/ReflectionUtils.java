@@ -24,8 +24,8 @@ public class ReflectionUtils {
 	/**
 	 * Search for a given identifier. Constructs primitives and classes. The
 	 * syntax for an array is ClassName+++, where the number of plus signs
-	 * mean the number of nested arrays. By default, classes will be looked up
-	 * under 'java.lang.*' and '*'. Additional imports can be specified
+	 * mean the number of nested arrays. By default, classes will be resolved
+	 * under 'java.lang.*' and '*'. Additional imports can be specified.
 	 * 
 	 * @param identifier Name of the class to load
 	 * @param imports List of extra imports
@@ -33,7 +33,9 @@ public class ReflectionUtils {
 	 * @throws IllegalArgumentException In case of a void array
 	 * @throws ClassNotFoundException In case the class cannot be found
 	 */
-	public static Class<?> findType(String identifier, List<Import> imports) throws IllegalArgumentException, ClassNotFoundException {
+	public static Class<?> findType(String identifier, List<Import> imports)
+			throws IllegalArgumentException, ClassNotFoundException {
+
 		int dimension = identifier.indexOf('+');
 		
 		// Check for array type
@@ -50,11 +52,13 @@ public class ReflectionUtils {
 		// Check for result
 		if (primitive != null) {
 			if (primitive.equals(void.class) && dimension > 0) {
-				throw new IllegalArgumentException("Cannot create an void array");
+				throw new IllegalArgumentException("Cannot create an void array.");
 			}
 			
 			// Stop here if dimension is zero
-			if (dimension == 0) return primitive;
+			if (dimension == 0) {
+				return primitive;
+			}
 		}
 		
 		// Search for class, or create an array from a primitive
@@ -82,16 +86,15 @@ public class ReflectionUtils {
 			
 				try {
 					return Class.forName(needle, false, Thread.currentThread().getContextClassLoader());
-				} catch (ClassNotFoundException exception) { }
+				} catch (ClassNotFoundException exception) {
+					// Ignore
+				}
 			}
 		}
 		
 		// It failed
 		throw new ClassNotFoundException(String.format(
-			"Cannot find class '%s%s'",
-			identifier,
-			Strings.repeat("[]", dimension)
-		));
+			"Cannot find class '%s%s'", identifier, Strings.repeat("[]", dimension)));
 	}
 	
 	/**
@@ -118,19 +121,19 @@ public class ReflectionUtils {
 	 * @return Internal representation of class, or null
 	 */
 	public static String primitiveToInternalName(Class<?> primitive) {
-		Map<Class<?>, String> haystack = Maps.newHashMap();
+		Map<Class<?>, String> mapping = Maps.newHashMap();
+
+		mapping.put(boolean.class, "Z");
+		mapping.put(byte.class, "B");
+		mapping.put(char.class, "C");
+		mapping.put(double.class, "D");
+		mapping.put(float.class, "F");
+		mapping.put(int.class, "I");
+		mapping.put(long.class, "J");
+		mapping.put(short.class, "S");
+		mapping.put(void.class, "V");
 		
-		haystack.put(boolean.class, "Z");
-		haystack.put(byte.class, "B");
-		haystack.put(char.class, "C");
-		haystack.put(double.class, "D");
-		haystack.put(float.class, "F");
-		haystack.put(int.class, "I");
-		haystack.put(long.class, "J");
-		haystack.put(short.class, "S");
-		haystack.put(void.class, "V");
-		
-		return haystack.get(primitive);
+		return mapping.get(primitive);
 	}
 	
 	/**
@@ -146,7 +149,7 @@ public class ReflectionUtils {
 			return type.getName().replace(".", "/");
 		}
 	}
-	
+
 	/**
 	 * Convert a list of classes to JVM representation
 	 * @param types List of classes
@@ -154,17 +157,17 @@ public class ReflectionUtils {
 	 */
 	public static String toInternalNames(List<Class<?>> types) {
 		StringBuilder result = new StringBuilder();
-		
+
 		for (Class<?> type : types) {
 			result.append(toInternalName(type));
 		}
-		
+
 		return result.toString();
 	}
-	
+
 	/**
 	 * Create a method signature for ASM
-	 * 
+	 *
 	 * @param returnType Method return type
 	 * @param parameters List of parameters
 	 * @return Method signature
@@ -203,14 +206,11 @@ public class ReflectionUtils {
 	public static List<String> prettyTypesList(List<Class<?>> types) {
 		checkNotNull(types);
 		
-		return Lists.transform(
-			types,
-			new Function<Class<?>, String>() {
-				@Override
-				public String apply(final Class<?> input) {
-					return input.getName();
-				}
+		return Lists.transform(types, new Function<Class<?>, String>() {
+			@Override
+			public String apply(final Class<?> input) {
+				return input.getName();
 			}
-		);
+		});
 	}
 }

@@ -319,11 +319,16 @@ package_name returns [String path = ""]
 
 // Types
 type returns [String type = ""]
-	:	node=sub_type (array_declare 
-			{ 
+	:	node=sub_type
+		{
+			$type = $node.type;
+		}
+		(
+			array_declare
+			{
 				$type = $node.type + "+";
 			}
-		)* 
+		)*
 		-> ^(TYPE[$type])
 	;
 	

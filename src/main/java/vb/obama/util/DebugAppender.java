@@ -16,7 +16,7 @@ import vb.obama.compiler.SymbolTable;
 
 /**
  * Special type of log appender which indents based on the current symbol table
- * level. Structurizes the output of the checker
+ * level. Structures the output of the checker.
  * 
  * @version 1.0
  */
