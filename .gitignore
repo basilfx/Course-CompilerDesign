@@ -1,4 +1,5 @@
 # Java files
+.factorypath
 target/
 bin/
 
@@ -10,3 +11,6 @@ bin/
 # IntelliJ
 .idea/
 *.iml
+
+# Visual Studio Code
+.vscode
