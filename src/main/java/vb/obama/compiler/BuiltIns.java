@@ -6,6 +6,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.Reader;
 import java.util.List;
 
@@ -203,18 +204,18 @@ public class BuiltIns {
 		generator.getStatic(
 			Type.getType(System.class),
 			"out",
-			Type.getType(System.out.getClass())
+			Type.getType(PrintStream.class)
 		);
 		
 		// Swap the values
 		generator.swap(
 			Type.getType(type),
-			Type.getType(System.out.getClass())
+			Type.getType(PrintStream.class)
 		);
 		
 		// Invoke System.out.println
 		generator.invokeVirtual(
-			Type.getType(System.out.getClass()),
+			Type.getType(PrintStream.class),
 			new Method(
 				"println",
 				Type.getType(void.class),
@@ -235,18 +236,18 @@ public class BuiltIns {
 			generator.getStatic(
 				Type.getType(System.class),
 				"out",
-				Type.getType(System.out.getClass())
+				Type.getType(PrintStream.class)
 			);
 			
 			// Swap the values
 			generator.swap(
 				Type.getType(type),
-				Type.getType(System.out.getClass())
+				Type.getType(PrintStream.class)
 			);
 			
 			// Invoke System.out.println
 			generator.invokeVirtual(
-				Type.getType(System.out.getClass()),
+				Type.getType(PrintStream.class),
 				new Method(
 					"println",
 					Type.getType(void.class),
