@@ -8,7 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
@@ -43,7 +44,7 @@ public class CodegenHelper {
 	/**
 	 * Message logger
 	 */
-	private static final Logger logger = Logger.getLogger(CodegenHelper.class.getName());
+	private static final Logger logger = LogManager.getLogger(CodegenHelper.class.getName());
 	
 	/**
 	 * Holds all generated classes

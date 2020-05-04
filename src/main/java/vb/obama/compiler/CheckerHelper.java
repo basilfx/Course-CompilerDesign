@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.Opcodes;
 
 import vb.obama.antlr.tree.NodeType;
@@ -46,7 +47,7 @@ public class CheckerHelper {
 	/**
 	 * Message logger
 	 */
-	private static final Logger logger = Logger.getLogger(CheckerHelper.class.getName());
+	private static final Logger logger = LogManager.getLogger(CheckerHelper.class.getName());
 	
 	/**
 	 * Reference to the symbol table

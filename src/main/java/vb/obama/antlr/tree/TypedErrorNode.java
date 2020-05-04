@@ -4,9 +4,6 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.tree.CommonErrorNode;
-import org.apache.log4j.Logger;
-
-import vb.obama.Obama;
 
 /**
  * Represents an typed error node

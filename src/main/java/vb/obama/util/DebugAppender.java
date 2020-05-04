@@ -1,113 +1,131 @@
 package vb.obama.util;
 
-import java.io.OutputStreamWriter;
-
-import org.apache.log4j.Appender;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Layout;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.spi.ErrorHandler;
-import org.apache.log4j.spi.Filter;
-import org.apache.log4j.spi.LoggingEvent;
+import java.io.Serializable;
+import java.nio.charset.Charset;
+import java.util.List;
 
 import com.google.common.base.Strings;
+
+import org.apache.logging.log4j.core.Appender;
+import org.apache.logging.log4j.core.ErrorHandler;
+import org.apache.logging.log4j.core.Layout;
+import org.apache.logging.log4j.core.LogEvent;
+import org.apache.logging.log4j.core.appender.ConsoleAppender;
+import org.apache.logging.log4j.core.layout.PatternLayout;
+import org.apache.logging.log4j.core.layout.PatternSelector;
+import org.apache.logging.log4j.core.pattern.PatternFormatter;
+import org.apache.logging.log4j.core.pattern.PatternParser;
 
 import vb.obama.compiler.SymbolTable;
 
 /**
  * Special type of log appender which indents based on the current symbol table
  * level. Structures the output of the checker.
- * 
+ *
  * @version 1.0
  */
 public class DebugAppender implements Appender {
-
 	/**
 	 * Reference to the Symbol table
 	 */
 	private SymbolTable table;
-	
+
 	/**
 	 * Reference to the actual appender
 	 */
 	private ConsoleAppender appender;
-	
+
 	/**
 	 * Construct a new DebugAppender
 	 */
 	public DebugAppender() {
-		this.appender = new ConsoleAppender();
-		this.appender.setWriter(new OutputStreamWriter(System.out));
-		this.appender.setLayout(new PatternLayout("%-5p [%t]: %m%n"));
+		PatternLayout layout = PatternLayout.newBuilder()
+			.withPatternSelector(new PatternSelector() {
+				@Override
+				public PatternFormatter[] getFormatters(final LogEvent event) {
+					int count = DebugAppender.this.table != null ? DebugAppender.this.table.getCurrentLevel() + 1 : 0;
+
+					final PatternParser parser = PatternLayout.createPatternParser(null);
+					final List<PatternFormatter> list = parser.parse("%-5p " + Strings.repeat("  ", count) + "[%t]: %m%n");
+
+					return list.toArray(new PatternFormatter[list.size()]);
+				}
+			})
+			.withCharset(Charset.defaultCharset())
+			.withAlwaysWriteExceptions(false)
+			.withNoConsoleNoAnsi(false)
+			.build();
+
+		this.appender = ConsoleAppender.createDefaultAppenderForLayout(layout);
 	}
-	
+
 	/**
 	 * Set the Symbol table. Table may be null to clear the table.
+	 *
 	 * @param table Symbol table
 	 */
-	public void setTable(SymbolTable table) {
+	public void setTable(final SymbolTable table) {
 		this.table = table;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addFilter(Filter arg0) {
-		this.appender.addFilter(arg0);
+	public State getState() {
+		return this.appender.getState();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void clearFilters() {
-		this.appender.clearFilters();
+	public void initialize() {
+		this.appender.initialize();
+
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void close() {
-		this.appender.close();
-	}
+	public void start() {
+		this.appender.start();
 
-	/**
-	 * Output a logging event to the logger. Sets the layout of the output to 
-	 * indent the text based on the current level of the symbol table. If the
-	 * symbol table is null or the current level is -1, nog indentation will
-	 * happen.
-	 */
-	@Override
-	public void doAppend(LoggingEvent arg0) {
-		int count = this.table != null ? this.table.getCurrentLevel() + 1 : 0;
-		this.setLayout(new PatternLayout("%-5p " + Strings.repeat("  ", count) + "[%t]: %m%n"));
-		this.appender.doAppend(arg0);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ErrorHandler getErrorHandler() {
-		return this.appender.getErrorHandler();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Filter getFilter() {
-		return this.appender.getFilter();
+	public void stop() {
+		this.appender.stop();
+
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Layout getLayout() {
-		return this.appender.getLayout();
+	public boolean isStarted() {
+		return this.appender.isStarted();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isStopped() {
+		return this.appender.isStopped();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void append(LogEvent event) {
+		this.appender.append(event);
+
 	}
 
 	/**
@@ -122,31 +140,31 @@ public class DebugAppender implements Appender {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean requiresLayout() {
-		return this.appender.requiresLayout();
+	public Layout<? extends Serializable> getLayout() {
+		return this.appender.getLayout();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setErrorHandler(ErrorHandler arg0) {
-		this.appender.setErrorHandler(arg0);
+	public boolean ignoreExceptions() {
+		return this.appender.ignoreExceptions();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setLayout(Layout arg0) {
-		this.appender.setLayout(arg0);
+	public ErrorHandler getHandler() {
+		return this.appender.getHandler();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setName(String arg0) {
-		this.appender.setName(arg0);
+	public void setHandler(ErrorHandler handler) {
+		this.appender.setHandler(handler);
 	}
 }

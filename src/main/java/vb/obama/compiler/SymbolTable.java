@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import vb.obama.exceptions.SymbolTableException;
 
 import com.google.common.collect.Maps;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static com.google.common.base.Preconditions.*;
 
@@ -17,7 +18,7 @@ import static com.google.common.base.Preconditions.*;
  * @version 1.1
  */
 public class SymbolTable {
-	private static final Logger logger = Logger.getLogger(SymbolTable.class.getName());
+	private static final Logger logger = LogManager.getLogger(SymbolTable.class.getName());
 	
 	/**
 	 * Current identifier level

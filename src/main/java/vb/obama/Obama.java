@@ -8,7 +8,6 @@ import java.util.List;
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.debug.BlankDebugEventListener;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.antlr.runtime.tree.DOTTreeGenerator;
@@ -20,8 +19,10 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
 
 import vb.obama.antlr.ObamaChecker;
 import vb.obama.antlr.ObamaCodegen;
@@ -62,7 +63,7 @@ public class Obama {
 	/**
 	 * Message logger
 	 */
-	private static final Logger logger = Logger.getLogger(Obama.class.getName());
+	private static final Logger logger = LogManager.getLogger(Obama.class.getName());
 	
 	/**
 	 * Main entry point.
@@ -106,7 +107,7 @@ public class Obama {
 		result.addOption("h", "help", false, "print this message");
 		result.addOption("v", "version", false, "print version number");
 		result.addOption("d", "debug", false, "enable debug and increase logging");
-		result.addOption("a", "antlrworks", false, "enable remote debuggin of ANTLR files in ANTLR Works");
+		result.addOption("a", "antlrworks", false, "enable remote debugging of ANTLR files in ANTLR Works");
 		
 		// Input file
 		result.addOption("f", "file", true, "input file");
@@ -155,7 +156,7 @@ public class Obama {
 		
 		// Handle debugging and logging
 		if (options.hasOption("debug")){
-			Logger.getRootLogger().setLevel(Level.DEBUG);
+			Configurator.setRootLevel(Level.DEBUG);
 			Obama.debug = true;
 			
 			// Test message
@@ -240,7 +241,7 @@ public class Obama {
 		try {
 			// Codegen
 			CommonTreeNodeStream codegenNodes = new CommonTreeNodeStream(tree);
-			ObamaCodegen codegen = Obama.antlrWorks ? new ObamaCodegen(codegenNodes) : new ObamaCodegen(codegenNodes, new BlankDebugEventListener());
+			ObamaCodegen codegen = Obama.antlrWorks ? new ObamaCodegen(codegenNodes) : new ObamaCodegen(codegenNodes);
 			codegen.setTreeAdaptor(new TypedNodeAdapter());
 			codegen.program();
 

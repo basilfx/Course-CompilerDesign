@@ -11,7 +11,9 @@ options {
 @header {
 	package vb.obama.antlr;
 	
-	import org.apache.log4j.Logger;
+	import org.apache.logging.log4j.LogManager;
+    import org.apache.logging.log4j.Logger;
+
 	import vb.obama.antlr.tree.*;
 	
 	import vb.obama.util.*;
@@ -37,7 +39,7 @@ options {
 	/**
 	 * Message logger
 	 */
-	private static final Logger logger = Logger.getLogger(ObamaChecker.class.getName());
+	private static final Logger logger = LogManager.getLogger(ObamaChecker.class.getName());
 
 	private SymbolTable table;
 	

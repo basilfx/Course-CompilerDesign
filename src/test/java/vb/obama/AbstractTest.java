@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.IOException;
 
 import org.antlr.runtime.*;
-import org.antlr.runtime.debug.BlankDebugEventListener;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
-import org.apache.log4j.Logger;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.rules.TemporaryFolder;
 import vb.obama.antlr.ObamaChecker;
 import vb.obama.antlr.ObamaCodegen;
@@ -34,7 +33,7 @@ abstract class AbstractTest {
 	/**
 	 * Reference to logger (used to output information to stdout/stderr).
 	 */
-	private static final Logger logger = Logger.getLogger(AbstractTest.class);
+	private static final Logger logger = LogManager.getLogger(AbstractTest.class);
 	
 	/**
 	 * Reference to appender.
@@ -54,6 +53,7 @@ abstract class AbstractTest {
 	protected boolean debugCodegen = false;
 	
 	public AbstractTest() {
+		appender.start();
 		LoggerSetup.setup(appender);
 	}
 
@@ -119,7 +119,7 @@ abstract class AbstractTest {
 				// Codegen
 				if (doCodegen) {
 					CommonTreeNodeStream codegenNodes = new CommonTreeNodeStream(tree);
-					ObamaCodegen codegen = this.debugCodegen ? new ObamaCodegen(codegenNodes) : new ObamaCodegen(codegenNodes, new BlankDebugEventListener());
+					ObamaCodegen codegen = this.debugCodegen ? new ObamaCodegen(codegenNodes) : new ObamaCodegen(codegenNodes);
 					codegen.setTreeAdaptor(new TypedNodeAdapter());
 					codegen.program();
 
